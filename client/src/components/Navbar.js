@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authentication';
-import { withRouter } from 'react-router-dom';
 
 class Navbar extends Component {
 
@@ -30,7 +29,7 @@ class Navbar extends Component {
                 <Link className="nav-link" to="/register">Sign Up</Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/login">Sign In</Link>
+                <Link className="nav-link" to="/login">Log In</Link>
             </li>
         </ul>
       )
