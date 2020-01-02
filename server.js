@@ -1,6 +1,5 @@
 const express = require('express'),
     chalk = require('chalk'),
-    session = require('express-session'),
     flash = require('connect-flash'),
     mongoose = require('mongoose'),
     passport = require('passport'),
@@ -29,20 +28,22 @@ require('./passport')(passport);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// set sessions and cookie parse
-app.use(session({
-    secret: process.env.SECRET,
-    cookie: { maxAge: 60000 },
-    resave: false,
-    saveUninitialized: false
-}));
-
 app.use(flash());
 
 app.use('/api/users', users);
 
 app.get('/', (req, res) => {
-    res.send('hello');
+    
+    // simple count for the session
+    if (!req.session.count) 
+    {
+        req.session.count = 0;
+    }
+    req.session.count += 1;
+ 
+    // respond with the session object
+    res.json(req.session);
+
 });
 
 const PORT = process.env.PORT || 7070;
