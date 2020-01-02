@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/authentication';
 import classnames from 'classnames';
@@ -89,10 +90,15 @@ class Login extends Component {
                     </div>
                     <div className="form-group">
                         <button type="submit" className="btn btn-primary">
-                            Login User
+                            Log in
                         </button>
                     </div>
                 </form>
+                <div className="container">
+                    <Link className="nav-link" to="/register">
+                        {"Don't have an account? Sign Up"}
+                    </Link>
+                </div>
             </div>
         );
     }
@@ -110,4 +116,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { loginUser })(Login)
+export default connect(mapStateToProps, { loginUser })(withRouter(Login));

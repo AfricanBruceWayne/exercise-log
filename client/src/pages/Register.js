@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { registerUser } from '../actions/authentication';
 import classnames from 'classnames';
 
@@ -120,10 +120,15 @@ class Register extends Component {
                     </div>
                     <div className="form-group">
                         <button type="submit" className="btn btn-primary">
-                            Register User
+                            Register
                         </button>
                     </div>
                 </form>
+                <div className="container">
+                    <Link className="nav-link" to="/login">
+                        {"Already have an account? Sign in"}
+                    </Link>
+                </div>
             </div>
         )
     }
