@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { Container } from 'reactstrap';
+
 import store from './store';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './setAuthToken';
@@ -10,6 +12,7 @@ import Navbar from './components/AppNavbar';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import NewExercise from './pages/NewExercise';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -35,10 +38,11 @@ class App extends Component {
                     <div>
                         <Navbar />
                         <Route exact path="/" component={Home} />
-                        <div className="container">
+                        <Container>
                             <Route exact path="/register" component={Register} />
                             <Route exact path="/login" component={Login} />
-                        </div>
+                            <Route exact path="/exercises/new" component={NewExercise} />
+                        </Container>
                     </div>
                 </Router>
             </Provider>

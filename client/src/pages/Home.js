@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Container} from 'reactstrap';
+import { Container } from 'reactstrap';
+
 export default class Home extends Component {
     render() {
         return (
@@ -12,7 +13,7 @@ export default class Home extends Component {
 
                 <Container>
                     { this.props.isAuthenticated ? (
-                        <a className="btn btn-primary btn-lg" href="/api/exercises/new" role="button">Add exercise</a>
+                        <a className="btn btn-primary btn-lg" href="/exercises/new" role="button">Add exercise</a>
                     ) : (
                         <p className='lead mb-3'>Please log in to manage exercises</p>
                     )}
