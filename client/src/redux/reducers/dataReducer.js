@@ -1,12 +1,12 @@
 import {
-    GET_EXERCISES, GET_AN_EXERCISE,
-    ADD_EXERCISE, UPDATE_EXERCISE, DELETE_EXERCISE,
+    GET_ACTIVITIES, GET_AN_ACTIVITY,
+    ADD_ACTIVITY, UPDATE_ACTIVITY, DELETE_ACTIVITY,
     LOADING_DATA
 } from '../types';
 
 const initialState = {
-    exercises = [],
-    exercise = {}, 
+    activities = [],
+    activity = {}, 
     loading: false
 };
 
@@ -17,29 +17,29 @@ export default function(state = initialState, action) {
           ...state,
           loading: true
         };
-      case GET_EXERCISES:
+      case GET_ACTIVITIES:
         return {
           ...state,
-          exercises: action.payload,
+          activities: action.payload,
           loading: false
         };
-      case GET_AN_EXERCISE:
+      case GET_AN_ACTIVITY:
         return {
           ...state,
-          exercise: action.payload
+          activity: action.payload
         };
-      case DELETE_EXERCISE:
-        index = state.exercises.findIndex(
-          (exercise) => exercise.exerciseId === action.payload
+      case DELETE_ACTIVITY:
+        index = state.activities.findIndex(
+          (activity) => activity.activityId === action.payload
         );
-        state.exercises.splice(index, 1);
+        state.activities.splice(index, 1);
         return {
           ...state
         };
-      case ADD_EXERCISE:
+      case ADD_ACTIVITY:
         return {
           ...state,
-          exercises: [action.payload, ...state.exercises]
+          activities: [action.payload, ...state.activities]
         };
       default:
         return state;
