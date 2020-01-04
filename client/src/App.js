@@ -6,7 +6,7 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from './setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authentication';
 
-import Navbar from './components/Navbar';
+import Navbar from './components/AppNavbar';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
