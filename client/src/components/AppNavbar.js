@@ -8,23 +8,24 @@ import {
     NavItem,
     NavLink,
     Container
-} from 'reactstrap'
-import { withRouter } from 'react-router-dom';
+  } from 'reactstrap';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions/authentication';
+import { logoutUser } from '../redux/actions/userActions';
 
 class AppNavbar extends Component {
 
     state = {
         isOpen: false
-    };
+      };
     
     toggle = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
+    this.setState({
+        isOpen: !this.state.isOpen
+    });
     };
+    
 
     onLogout(e) {
         e.preventDefault();
@@ -32,45 +33,47 @@ class AppNavbar extends Component {
     }
 
     render() {
+
         const {isAuthenticated, user} = this.props.auth;
+        
         const authLinks = (
-            <NavItem className="navbar-nav ml-auto">
-                <NavLink href="/logout" clNavLinkssName="nav-link" onClick={this.onLogout.bind(this)}>
-                    <img src={user.avatar} alt={user.name} title={user.name}
-                        className="rounded-circle"
-                        style={{ width: '25px', marginRight: '5px'}} />
-                            Logout
+            <Nav className="navbar-nav ml-auto">
+                <NavItem>
+                    <span className='navbar-text mr-3'>
+                        <strong>{user ? `Welcome ${user.name}` : ''}</strong>
+                    </span>
+                </NavItem>
+                <NavLink href="/logout" className="nav-link" onClick={this.onLogout.bind(this)}>
+                        Logout
                 </NavLink>
-            </NavItem>
+            </Nav>
         )
       const guestLinks = (
         <Nav className="navbar-nav ml-auto">
-            <NavItem>
-                <NavLink href="/register">Sign Up</NavLink>
+            <NavItem className="nav-item">
+                <Link className="nav-link" to="/register">Sign Up</Link>
             </NavItem>
-            <NavItem>
-                <NavLink href="/login">Log In</NavLink>
+            <NavItem className="nav-item">
+                <Link className="nav-link" to="/login">Sign In</Link>
             </NavItem>
         </Nav>
       )
         return(
-            <div>
-                <Navbar className="Navbarbar navbar-expand-lg navbar-light bg-light">
-                    <Container>
-                        <NavbarBrand href="/">Exercise Logger</NavbarBrand>
-                        <NavbarToggler onClick={this.toggle} />
-                        <Collapse isOpen={this.state.isOpen} navbar>
-                            <Nav className="ml-auto" navbar>
-                                {isAuthenticated ? authLinks : guestLinks}
-                            </Nav>
-                        </Collapse>
-                    </Container>
-                </Navbar>
-            </div>
+            <Navbar color='dark' dark expand='sm' className='mb-5'>
+                <Container>
+                    <NavbarBrand href="/">Activity Logger</NavbarBrand>
+                    <NavbarToggler onClick={this.toggle} />
+                    <Collapse isOpen={this.state.isOpen} navbar>
+                        <Nav className="ml-auto" navbar>
+                            {isAuthenticated ? authLinks : guestLinks}
+                        </Nav>
+                    </Collapse>
+                </Container>
+            </Navbar>
         )
     }
 }
-Navbar.propTypes = {
+AppNavbar.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
 }

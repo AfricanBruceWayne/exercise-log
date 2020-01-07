@@ -57,7 +57,7 @@ class ActivityModal extends Component {
                             Add Activity
                     </Button>
                 ) :  (
-                    <h4 className='mb-3 ml-4'>Please log in to manage items</h4>
+                    <p className='mb-3 ml-4 lead'>Please log in to manage activities</p>
                 )}
 
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
@@ -65,7 +65,7 @@ class ActivityModal extends Component {
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for='activity'>Activity</Label>
+                                <Label for='title'>Activity</Label>
                                 <Input
                                     type='text'
                                     name='title'
@@ -102,10 +102,10 @@ class ActivityModal extends Component {
 }
 
 ActivityModal.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     activity: state.activity,
     isAuthenticated: state.auth.isAuthenticated
 });

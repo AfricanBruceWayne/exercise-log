@@ -11,26 +11,22 @@ import PropTypes from 'prop-types';
 
 class ActivityList extends Component {
 
-    componentDidMount() 
-    {
+    componentDidMount() {
         this.props.getActivities();
     }
 
-    onEditClick = (id) => {
-        this.props.editActivity(id);
-    }
-
-    onDeleteClick = (id) => {
+    onDeleteClick = id => {
         this.props.deleteActivity(id);
     }
 
-    render() {
+      render() {
         const { activities } = this.props.activity;
+
         return (
           <Container>
             <ListGroup>
-              <TransitionGroup className='shopping-list'>
-                {activities.map(({ _id, title }) => (
+              <TransitionGroup className='activity-list'>
+                {activities.map(({ _id, date, title, description }) => (
                   <CSSTransition key={_id} timeout={500} classNames='fade'>
                     <ListGroupItem>
                       {this.props.isAuthenticated ? (
@@ -43,7 +39,8 @@ class ActivityList extends Component {
                           &times;
                         </Button>
                       ) : null}
-                      {title}
+                      {date}
+                      {title} &dash; {description}
                     </ListGroupItem>
                   </CSSTransition>
                 ))}
@@ -54,7 +51,13 @@ class ActivityList extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+ActivityList.propTypes = {
+  getActivities: PropTypes.func.isRequired,
+  activity: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = state => ({
     activity: state.activity,
     isAuthenticated: state.auth.isAuthenticated
 });
