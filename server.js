@@ -16,6 +16,7 @@ var isProduction = process.env.NODE_ENV === 'production';
 */
 
 var userRoutes = require('./routes/api/users');
+var activityRoutes = require('./routes/api/activities');
 
 /*
 * Connect to Mongo
@@ -45,6 +46,7 @@ app.use(flash());
 
 // Use routes
 app.use('/api/users', userRoutes);
+app.use('/api/activities', activityRoutes);
 
 // Serve static assets if in production
 if (isProduction)
