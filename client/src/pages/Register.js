@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
-import { registerUser } from '../actions/authentication';
+import { registerUser } from '../redux/actions/userActions';
 import classnames from 'classnames';
 
 class Register extends Component {
