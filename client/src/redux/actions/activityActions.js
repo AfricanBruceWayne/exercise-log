@@ -1,13 +1,13 @@
 import axios from 'axios';
 import {
-    GET_ACTIVITIES, GET_AN_ACTIVITY, ADD_ACTIVITY, UPDATE_ACTIVITY, DELETE_ACTIVITY,
-    LOADING_DATA, LOADING_UI, STOP_LOADING_UI,
+    GET_ACTIVITIES, ADD_ACTIVITY, DELETE_ACTIVITY,
+    LOADING_DATA,
     SET_ERRORS, CLEAR_ERRORS
 } from '../types';
 
 // Get all activities
 export const getActivities = () => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
+    dispatch(setActivitiesLoading());
     axios
         .get('/api/activities')
         .then((res) => {
@@ -24,24 +24,8 @@ export const getActivities = () => (dispatch) => {
         });
 };
 
-// Get An Activity
-export const getAnActivity = (activityId) => (dispatch) => {
-    dispatch({ type: LOADING_UI });
-    axios
-        .get(`/api/activities/${activityId}`)
-        .then((res) => {
-            dispatch({
-                type: GET_AN_ACTIVITY,
-                payload: res.data
-            });
-            dispatch({ type: STOP_LOADING_UI });
-        })
-        .catch((err) => console.log(err));
-};
-
 // Add New Activity
-export const addActivity = (newActivity) => (dispatch) => {
-    dispatch({ type: LOADING_UI });
+export const addActivity = (newActivity) => (dispatch, getState) => {
     axios
         .post('/api/activities', newActivity)
         .then((res) => {
@@ -60,16 +44,22 @@ export const addActivity = (newActivity) => (dispatch) => {
 };
 
 // Delete Activity
-export const deleteActivity = (activityId) => (dispatch) => {
+export const deleteActivity = (activityId) => (dispatch, getState) => {
     axios
         .delete(`/api/activities/${activityId}`)
-        .then(() => {
+        .then(res => {
             dispatch({
                 type: DELETE_ACTIVITY,
                 payload: activityId
             });
         })
         .catch((err) => console.log(err));
+};
+
+export const setActivitiesLoading = () => {
+    return {
+        type: LOADING_DATA
+    };
 };
 
 export const clearErrors = () => (dispatch) => {
