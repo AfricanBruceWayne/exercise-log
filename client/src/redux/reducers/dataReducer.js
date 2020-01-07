@@ -1,12 +1,11 @@
 import {
-    GET_ACTIVITIES, GET_AN_ACTIVITY,
-    ADD_ACTIVITY, UPDATE_ACTIVITY, DELETE_ACTIVITY,
+    GET_ACTIVITIES,
+    ADD_ACTIVITY, DELETE_ACTIVITY,
     LOADING_DATA
 } from '../types';
 
 const initialState = {
-    activities = [],
-    activity = {}, 
+    activities: [],
     loading: false
 };
 
@@ -23,18 +22,10 @@ export default function(state = initialState, action) {
           activities: action.payload,
           loading: false
         };
-      case GET_AN_ACTIVITY:
+      case DELETE_ACTIVITY:
         return {
           ...state,
-          activity: action.payload
-        };
-      case DELETE_ACTIVITY:
-        index = state.activities.findIndex(
-          (activity) => activity.activityId === action.payload
-        );
-        state.activities.splice(index, 1);
-        return {
-          ...state
+          activities: state.activities.filter(activity => activity._id !== action.payload)
         };
       case ADD_ACTIVITY:
         return {
