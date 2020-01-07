@@ -3,14 +3,16 @@ import thunk from 'redux-thunk';
 
 import userReducer from './reducers/authReducer';
 import activityReducer from './reducers/dataReducer';
+import errorReducer from './reducers/errorReducer';
 
 const initialState = {};
 
 const middleWare = [thunk];
 
 const reducers = combineReducers({
-    user: userReducer,
-    data: activityReducer
+    auth: userReducer,
+    activity: activityReducer,
+    errors: errorReducer
 });
 
 const composeEnhancers = 
