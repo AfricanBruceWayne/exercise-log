@@ -1,13 +1,15 @@
 // DATA TYPES
 export const GET_ACTIVITIES = 'GET_ACTIVITIES';
-export const GET_AN_ACTIVITY = 'GET_AN_ACTIVITY';
 export const ADD_ACTIVITY = 'ADD_ACTIVITY';
-export const UPDATE_ACTIVITY = 'UPDATE_ACTIVITY';
 export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
 
 // AUTH TYPES
 export const GET_ERRORS = 'GET_ERRORS';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
+export const SET_UNAUTHENTICATED = 'SET_UNAUTHENTICATED';
+export const SET_USER = 'SET_USER';
+export const LOADING_USER = 'LOADING_USER';
 
 // UI reducer types
 export const SET_ERRORS = 'SET_ERRORS';
