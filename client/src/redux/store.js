@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import userReducer from './reducers/authReducer';
 import activityReducer from './reducers/dataReducer';
 import errorReducer from './reducers/errorReducer';
+import messageReducer from './reducers/flashReducer';
 
 const initialState = {};
 
@@ -12,7 +13,8 @@ const middleWare = [thunk];
 const reducers = combineReducers({
     auth: userReducer,
     activity: activityReducer,
-    errors: errorReducer
+    errors: errorReducer,
+    flashMessage: messageReducer
 });
 
 const composeEnhancers = 
