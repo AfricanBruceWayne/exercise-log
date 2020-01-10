@@ -54,7 +54,7 @@ class AppNavbar extends Component {
                 <Link className="nav-link" to="/register">Sign Up</Link>
             </NavItem>
             <NavItem className="nav-item">
-                <Link className="nav-link" to="/login">Sign In</Link>
+                <Link className="nav-link" to="/login">Log In</Link>
             </NavItem>
         </Nav>
       )

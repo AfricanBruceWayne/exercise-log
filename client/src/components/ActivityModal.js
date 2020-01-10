@@ -57,7 +57,7 @@ class ActivityModal extends Component {
                             Add Activity
                     </Button>
                 ) :  (
-                    <p className='mb-3 ml-4 lead'>Please log in to manage activities</p>
+                    null
                 )}
 
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
