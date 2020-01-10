@@ -21,9 +21,9 @@ class AppNavbar extends Component {
       };
     
     toggle = () => {
-    this.setState({
-        isOpen: !this.state.isOpen
-    });
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
     };
     
 
@@ -59,17 +59,20 @@ class AppNavbar extends Component {
         </Nav>
       )
         return(
-            <Navbar color='dark' dark expand='sm' className='mb-5'>
-                <Container>
-                    <NavbarBrand href="/">Activity Logger</NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            {isAuthenticated ? authLinks : guestLinks}
-                        </Nav>
-                    </Collapse>
-                </Container>
-            </Navbar>
+            <div>
+                <Navbar color='dark' dark expand='sm' className='mb-5'>
+                    <Container>
+                        <NavbarBrand href="/">Activity Logger</NavbarBrand>
+                        <NavbarToggler onClick={this.toggle} />
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar>
+                                {isAuthenticated ? authLinks : guestLinks}
+                            </Nav>
+                        </Collapse>
+                    </Container>
+                </Navbar>
+
+            </div>
         )
     }
 }
