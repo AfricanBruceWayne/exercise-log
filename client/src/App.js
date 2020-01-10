@@ -9,7 +9,6 @@ import setAuthToken from './redux/setAuthToken';
 import { setCurrentUser, logoutUser } from './redux/actions/userActions';
 
 import AppNavbar from './components/AppNavbar';
-import ActivityList from './components/ActivityList';
 import ActivityModal from './components/ActivityModal';
 
 import Register from './pages/Register';
@@ -41,10 +40,9 @@ class App extends Component {
                 <Router>
                     <div className='App'>
                         <AppNavbar />
+                        <ActivityModal />
                         <Route exact path="/" component={Home} />
                         <Container>
-                            <ActivityModal />
-                            <ActivityList />
                             <Route exact path="/register" component={Register} />
                             <Route exact path="/login" component={Login} />
                         </Container>
