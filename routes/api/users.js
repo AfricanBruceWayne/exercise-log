@@ -32,7 +32,8 @@ router.post('/register', (req, res) => {
             
             bcrypt.genSalt(10, (err, salt) => {
                 if(err) console.error('There was an error', err);
-                else {
+                else 
+                {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if(err) console.error('There was an error', err);
                         else {
@@ -46,6 +47,7 @@ router.post('/register', (req, res) => {
                     });
                 }
             });
+            req.flash("success", "Successfully Signed Up! Nice to meet you " + req.body.name);
         }
     });
 });
