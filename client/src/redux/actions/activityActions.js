@@ -1,13 +1,13 @@
 import axios from 'axios';
 import {
     GET_ACTIVITIES, ADD_ACTIVITY, DELETE_ACTIVITY,
-    LOADING_DATA,
     SET_ERRORS, CLEAR_ERRORS
 } from '../types';
 
+import { alertActions } from './alertActions';
+
 // Get all activities
 export const getActivities = () => (dispatch) => {
-    dispatch(setActivitiesLoading());
     axios
         .get('/api/activities')
         .then((res) => {
@@ -33,7 +33,7 @@ export const addActivity = (newActivity) => (dispatch, getState) => {
                 type: ADD_ACTIVITY,
                 payload: res.data
             });
-            dispatch(clearErrors());
+            dispatch(alertActions.success('New activity added'));
         })
         .catch((err) => {
             dispatch({
@@ -52,14 +52,9 @@ export const deleteActivity = (activityId) => (dispatch, getState) => {
                 type: DELETE_ACTIVITY,
                 payload: activityId
             });
+            dispatch(alertActions.success('Activity Deleted'))
         })
         .catch((err) => console.log(err));
-};
-
-export const setActivitiesLoading = () => {
-    return {
-        type: LOADING_DATA
-    };
 };
 
 export const clearErrors = () => (dispatch) => {
