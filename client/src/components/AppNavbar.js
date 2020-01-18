@@ -14,8 +14,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions/userActions';
 
-class AppNavbar extends Component {
 
+class AppNavbar extends Component {
+    
     state = {
         isOpen: false
       };
@@ -34,7 +35,7 @@ class AppNavbar extends Component {
 
     render() {
 
-        const {isAuthenticated, user} = this.props.auth;
+        const { isAuthenticated, user } = this.props.auth;
         
         const authLinks = (
             <Nav className="navbar-nav ml-auto">
@@ -71,7 +72,6 @@ class AppNavbar extends Component {
                         </Collapse>
                     </Container>
                 </Navbar>
-
             </div>
         )
     }
