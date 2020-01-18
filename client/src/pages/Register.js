@@ -14,6 +14,7 @@ class Register extends Component {
             email: '',
             password: '',
             password_confirm: '',
+            message: '',
             errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -136,12 +137,14 @@ class Register extends Component {
 
 Register.propTypes = {
     registerUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    message: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    errors: state.errors
+    errors: state.errors,
+    message: state.message
 });
 
 export default connect(mapStateToProps, { registerUser })(withRouter(Register));

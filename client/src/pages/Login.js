@@ -12,6 +12,7 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
+            message: '',
             errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -108,12 +109,14 @@ class Login extends Component {
 Login.propTypes = {
     loginUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
+    message: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    errors: state.errors
+    errors: state.errors,
+    message: state.message
 })
 
 export default connect(mapStateToProps, { loginUser })(withRouter(Login));

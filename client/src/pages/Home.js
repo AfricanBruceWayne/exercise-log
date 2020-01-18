@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container } from 'reactstrap';
+
 import ActivityList from '../components/ActivityList';
 
 class Home extends Component {
@@ -24,11 +25,13 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    message: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    message: state.message
 });
 
 export default connect(
