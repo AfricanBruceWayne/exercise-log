@@ -5,6 +5,7 @@ import userReducer from './reducers/authReducer';
 import activityReducer from './reducers/dataReducer';
 import errorReducer from './reducers/errorReducer';
 import messageReducer from './reducers/flashReducer';
+import alertReducer from './reducers/alertReducer';
 
 const initialState = {};
 
@@ -14,7 +15,8 @@ const reducers = combineReducers({
     auth: userReducer,
     activity: activityReducer,
     errors: errorReducer,
-    flashMessage: messageReducer
+    message: messageReducer,
+    alert: alertReducer
 });
 
 const composeEnhancers = 
