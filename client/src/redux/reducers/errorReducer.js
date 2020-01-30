@@ -1,10 +1,10 @@
-import { GET_ERRORS } from '../types';
+import { authConstants } from '../../constants';
 
 const initialState = {};
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case GET_ERRORS:
+        case authConstants.GET_ERRORS:
             return action.payload;  
         default:
             return state;

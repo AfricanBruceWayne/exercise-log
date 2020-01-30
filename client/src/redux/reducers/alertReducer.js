@@ -1,22 +1,18 @@
-import {
-    SUCCESS_FLASH,
-    ERROR_FLASH,
-    CLEAR_FLASH
-} from '../types';
+import { alertConstants } from '../../constants';
 
-export default function alert(state = {}, action) {
+export default function(state = {}, action) {
     switch (action.type) {
-        case SUCCESS_FLASH:
+        case alertConstants.SUCCESS_FLASH:
             return {
                 type: 'alert-success',
                 message: action.message
             };
-        case ERROR_FLASH:
+        case alertConstants.ERROR_FLASH:
             return {
                 type: 'alert-danger',
                 message: action.message
             };
-        case CLEAR_FLASH:
+        case alertConstants.CLEAR_FLASH:
             return {};
         default:
             return state;

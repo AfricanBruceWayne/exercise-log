@@ -1,8 +1,4 @@
-import {
-    GET_ACTIVITIES,
-    ADD_ACTIVITY, DELETE_ACTIVITY,
-    LOADING_DATA
-} from '../types';
+import { activityConstants} from '../../constants';
 
 const initialState = {
     activities: [],
@@ -11,23 +7,23 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch (action.type) {
-      case LOADING_DATA:
+      case activityConstants.LOADING_DATA:
         return {
           ...state,
           loading: true
         };
-      case GET_ACTIVITIES:
+      case activityConstants.GET_ACTIVITIES:
         return {
           ...state,
           activities: action.payload,
           loading: false
         };
-      case DELETE_ACTIVITY:
+      case activityConstants.DELETE_ACTIVITY:
         return {
           ...state,
           activities: state.activities.filter(activity => activity._id !== action.payload)
         };
-      case ADD_ACTIVITY:
+      case activityConstants.ADD_ACTIVITY:
         return {
           ...state,
           activities: [action.payload, ...state.activities]
