@@ -22,7 +22,7 @@ export const getActivities = () => (dispatch) => {
 };
 
 // Add New Activity
-export const addActivity = (newActivity) => (dispatch, getState) => {
+export const addActivity = (newActivity) => (dispatch) => {
     axios
         .post('/api/activities', newActivity)
         .then((res) => {
@@ -41,7 +41,7 @@ export const addActivity = (newActivity) => (dispatch, getState) => {
 };
 
 // Delete Activity
-export const deleteActivity = (activityId) => (dispatch, getState) => {
+export const deleteActivity = (activityId) => (dispatch) => {
     axios
         .delete(`/api/activities/${activityId}`)
         .then(res => {
