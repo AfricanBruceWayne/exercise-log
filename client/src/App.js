@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 
 import store from './redux/store';
-import setAuthToken from './redux/setAuthToken';
+import { setAuthToken }  from './helpers';
 import { setCurrentUser, logoutUser } from './redux/actions/userActions';
 import { alertActions } from './redux/actions/alertActions'
 
