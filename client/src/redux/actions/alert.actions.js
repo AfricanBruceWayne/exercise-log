@@ -1,8 +1,4 @@
-import {
-    SUCCESS_FLASH,
-    ERROR_FLASH,
-    CLEAR_FLASH
-} from '../types';
+import { alertConstants } from '../../constants';
 
 export const alertActions = {
     success,
@@ -12,20 +8,20 @@ export const alertActions = {
 
 function success(message) {
     return {
-        type: SUCCESS_FLASH,
+        type: alertConstants.SUCCESS_FLASH,
         message
     }
 }
 
 function error(message) {
     return {
-        type: ERROR_FLASH,
+        type: alertConstants.ERROR_FLASH,
         message
     }
 }
 
 function clear() {
     return {
-        type: CLEAR_FLASH
+        type: alertConstants.CLEAR_FLASH
     }
 }

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import jwt_decode from 'jwt-decode';
 import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
+import jwt_decode from 'jwt-decode';
 
 
-import store from './redux/store';
-import setAuthToken from './redux/setAuthToken';
-import { setCurrentUser, logoutUser } from './redux/actions/userActions';
-import { alertActions } from './redux/actions/alertActions'
+import { history, store, setAuthToken } from './helpers';
+import { alertActions, logoutUser, setCurrentUser } from './redux/actions';
 
 import AppNavbar from './components/AppNavbar';
 import ActivityModal from './components/ActivityModal';
@@ -21,10 +19,6 @@ import Home from './pages/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import { createBrowserHistory } from 'history';
-
-export const history = createBrowserHistory();
-
 if (localStorage.jwtToken)
 {
     setAuthToken(localStorage.jwtToken);
@@ -35,11 +29,9 @@ if (localStorage.jwtToken)
     if (decoded.exp < currentTime)
     {
         store.dispatch(logoutUser());
-        window.location.href = '/'
+        window.location.href = '/';
     }
 }
-
-
 
 class App extends Component {
     
@@ -59,7 +51,7 @@ class App extends Component {
 
         return (
             <Provider store={store}>
-                <Router>
+                <Router history={history}>
                     <div className='App'>
                         <AppNavbar />
                         <div className="container mx-auto mb-3">
@@ -74,8 +66,8 @@ class App extends Component {
                         <ActivityModal />
                         <Route exact path="/" component={Home} />
                         <Container>
-                            <Route exact path="/register" component={Register} />
-                            <Route exact path="/login" component={Login} />
+                            <Route path="/register" component={Register} />
+                            <Route path="/login" component={Login} />
                         </Container>
                     </div>
                 </Router>
@@ -84,8 +76,9 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    alert: state.alert
-})
+function mapStateToProps(state) {
+    const alert = state;
+    return { alert }
+}
 
 export default connect(mapStateToProps)(App); 

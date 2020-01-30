@@ -10,9 +10,9 @@ import {
     Container
   } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { logoutUser } from '../redux/actions/userActions';
+import { logoutUser } from '../redux/actions';
+import { history } from '../helpers';
 
 
 class AppNavbar extends Component {
@@ -30,7 +30,7 @@ class AppNavbar extends Component {
 
     onLogout(e) {
         e.preventDefault();
-        this.props.logoutUser(this.props.history);
+        logoutUser(history);
     }
 
     render() {
@@ -76,13 +76,10 @@ class AppNavbar extends Component {
         )
     }
 }
-AppNavbar.propTypes = {
-    logoutUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+
+function mapStateToProps(state) {
+    const auth = state.auth
+    return { auth };
 }
 
-const mapStateToProps = (state) => ({
-    auth: state.auth
-})
-
-export default connect(mapStateToProps, { logoutUser })(withRouter(AppNavbar));
+export default connect(mapStateToProps)(withRouter(AppNavbar));

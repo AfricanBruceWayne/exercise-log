@@ -5,20 +5,21 @@ import {
 } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { getActivities, deleteActivity } from '../redux/actions/activityActions';
-import PropTypes from 'prop-types';
+
+import { activityActions } from '../redux/actions';
 
 class ActivityList extends Component {
 
     componentDidMount() {
-        this.props.getActivities();
+        this.props.dispatch(activityActions.getAll());
     }
 
-    onDeleteClick = id => {
-        this.props.deleteActivity(id);
+    onDeleteClick(id) {
+        this.props.dispatch(activityActions.delete(id));
     }
 
       render() {
+
         const { activities } = this.props.activity;
 
         return (
@@ -37,7 +38,7 @@ class ActivityList extends Component {
                       </tr>
                     </thead>
                   <tbody>
-                    {activities.map(({ _id, date, title, description }) => (
+                  {activities.map(({ _id, date, title, description }) => (
                     <CSSTransition key={_id} timeout={500} classNames='fade'>
                       <tr>
                         <th scope="row">1</th>
@@ -68,18 +69,14 @@ class ActivityList extends Component {
     }
 }
 
-ActivityList.propTypes = {
-  getActivities: PropTypes.func.isRequired,
-  activity: PropTypes.object.isRequired,
-  isAuthenticated: PropTypes.bool
-};
-
-const mapStateToProps = state => ({
-    activity: state.activity,
-    isAuthenticated: state.auth.isAuthenticated
-});
+function mapStateToProps(state) {
+    const  { activity } =  state;
+    const { isAuthenticated } = state.auth;
+    return {
+      activity, isAuthenticated
+    };
+}
 
 export default connect(
-    mapStateToProps,
-    { getActivities, deleteActivity }
+    mapStateToProps 
 )(ActivityList);

@@ -1,98 +1,79 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser } from '../redux/actions/userActions';
-import classnames from 'classnames';
+
+import { loginUser } from '../redux/actions'
 
 class Login extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        
         this.state = {
             email: '',
             password: '',
-            message: '',
-            errors: {}
-        }
+            submitted: false
+        };
+
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleInputChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        const user = {
-            email: this.state.email,
-            password: this.state.password
-        }
-        this.props.loginUser(user);
-    }
 
-    componentDidMount() 
-    {
-        if (this.props.auth.isAuthenticated)
+        this.setState({ submitted: true });
+        const { email, password } = this.state;
+        const { dispatch } = this.props
+        if (email && password)
         {
-            this.props.history.push('/');
-        }
-    }
-
-    componentWillReceiveProps(nextProps)
-    {
-        if (nextProps.auth.isAuthenticated)
-        {
-            this.props.history.push('/')
-        }
-        if (nextProps.errors)
-        {
-            this.setState({
-                errors: nextProps.errors
-            });
+            dispatch(loginUser(email, password));
         }
     }
 
     render() {
-        const { errors } = this.state;
+
+        const { email, password, submitted } = this.state;
 
         return (
-            <div className="container" style={{ marginTop: '50px', width: '700px'}}>
-                <h2 style={{marginBottom: '40px'}}>Login</h2>
-                <form onSubmit={ this.handleSubmit }>
-                    <div className="form-group">
+            <div className="container col-md-6 col-md-offset-3" style={{ marginTop: '50px', width: '700px'}}>
+                <h2>Login</h2>
+                <form onSubmit={this.handleSubmit}>
+                    <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
                         <input
                         type="email"
                         placeholder="Email"
-                        className={classnames('form-control form-control-lg', {
-                            'is-invalid': errors.email
-                        })}
                         name="email"
+                        className="form-control"
                         onChange={ this.handleInputChange }
-                        value={ this.state.email }
+                        value={email}
                         />
-                        {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
+                        {submitted && !email &&
+                            <div className="help-block">Email is required</div>
+                        }
                     </div>
-                    <div className="form-group">
+                    <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
                         <input
                         type="password"
                         placeholder="Password"
-                        className={classnames('form-control form-control-lg', {
-                            'is-invalid': errors.password
-                        })} 
                         name="password"
+                        className="form-control"
                         onChange={ this.handleInputChange }
-                        value={ this.state.password }
+                        value={password}
                         />
-                        {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
+                        {submitted && !password &&
+                            <div className="help-block">Password is required</div>
+                        }
                     </div>
                     <div className="form-group">
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" className="btn btn-primary btn-block">
                             Log in
-                        </button>
+                        </button>    
                     </div>
                 </form>
                 <div className="container">
@@ -106,17 +87,11 @@ class Login extends Component {
 
 }
 
-Login.propTypes = {
-    loginUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    message: PropTypes.object.isRequired
+function mapStateToProps(state) {
+    const { isAuthenticated } = state.auth;
+    return {
+        isAuthenticated
+    };
 }
 
-const mapStateToProps = (state) => ({
-    auth: state.auth,
-    errors: state.errors,
-    message: state.message
-})
-
-export default connect(mapStateToProps, { loginUser })(withRouter(Login));
+export default connect(mapStateToProps)(withRouter(Login));

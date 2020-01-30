@@ -6,8 +6,8 @@ import {
     Label, Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addActivity } from '../redux/actions/activityActions';
-import PropTypes from 'prop-types';
+
+import { activityActions } from '../redux/actions';
 
 class ActivityModal extends Component {
 
@@ -39,7 +39,7 @@ class ActivityModal extends Component {
         };
 
         // Add activity via addActivity action
-        this.props.addActivity(newActivity);
+        this.props.dispatch(activityActions.add(newActivity));
 
         // Close modal
         this.toggle();
@@ -101,16 +101,12 @@ class ActivityModal extends Component {
     }
 }
 
-ActivityModal.propTypes = {
-    isAuthenticated: PropTypes.bool
+function mapStateToProps(state) {
+    const { activity } = state.activity;
+    const { isAuthenticated } = state.auth;
+    return { activity, isAuthenticated };
 };
 
-const mapStateToProps = (state) => ({
-    activity: state.activity,
-    isAuthenticated: state.auth.isAuthenticated
-});
-
 export default connect(
-    mapStateToProps,
-    { addActivity }
+    mapStateToProps
 )(ActivityModal);

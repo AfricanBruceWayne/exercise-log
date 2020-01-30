@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { Container } from 'reactstrap';
 
 import ActivityList from '../components/ActivityList';
@@ -9,30 +8,24 @@ class Home extends Component {
     render() {
         return (
             <div>
-                { this.props.isAuthenticated ? (
+                <Container className="jumbotron mt-4 my-4">
+                    <h1 className="display-4">Hi! Welcome!</h1>
+                    <p className="lead">This is a simple application, keep a record of your workouts and training.</p>
+                    <hr className="my-4" />
+                    <div className='mb-3 ml-4 lead' />
+                </Container>
+                <Container>
                     <ActivityList />
-                ) :  (
-                    <Container className="jumbotron mt-4 my-4">
-                        <h1 className="display-4">Hi! Welcome!</h1>
-                        <p className="lead">This is a simple application, keep a record of your workouts and training.</p>
-                        <hr className="my-4" />
-                        <p className='mb-3 ml-4 lead'>Please log in to manage activities</p>
-                    </Container>
-                )}
+                </Container>
             </div>
             );
     }
 }
 
-Home.propTypes = {
-    isAuthenticated: PropTypes.bool,
-    message: PropTypes.object.isRequired
+function mapStateToProps(state) {
+    const { isAuthenticated } = state.auth
+    return {isAuthenticated};
 };
-
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    message: state.message
-});
 
 export default connect(
     mapStateToProps
