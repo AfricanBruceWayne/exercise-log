@@ -1,8 +1,5 @@
 import axios from 'axios';
-import {
-    GET_ACTIVITIES, ADD_ACTIVITY, DELETE_ACTIVITY,
-    SET_ERRORS, CLEAR_ERRORS
-} from '../types';
+import { activityConstants } from '../../constants';
 
 import { alertActions } from './alertActions';
 
@@ -12,13 +9,13 @@ export const getActivities = () => (dispatch) => {
         .get('/api/activities')
         .then((res) => {
             dispatch({
-                type: GET_ACTIVITIES,
+                type: activityConstants.GET_ACTIVITIES,
                 payload: res.data
             });
         })
         .catch((err) => {
             dispatch({
-                type: GET_ACTIVITIES,
+                type: activityConstants.GET_ACTIVITIES,
                 payload: []
             });
         });
@@ -30,14 +27,14 @@ export const addActivity = (newActivity) => (dispatch, getState) => {
         .post('/api/activities', newActivity)
         .then((res) => {
             dispatch({
-                type: ADD_ACTIVITY,
+                type: activityConstants.ADD_ACTIVITY,
                 payload: res.data
             });
             dispatch(alertActions.success('New activity added'));
         })
         .catch((err) => {
             dispatch({
-                type: SET_ERRORS,
+                type: activityConstants.SET_ERRORS,
                 payload: err.response.data
             });
         });
@@ -49,7 +46,7 @@ export const deleteActivity = (activityId) => (dispatch, getState) => {
         .delete(`/api/activities/${activityId}`)
         .then(res => {
             dispatch({
-                type: DELETE_ACTIVITY,
+                type: activityConstants.DELETE_ACTIVITY,
                 payload: activityId
             });
             dispatch(alertActions.success('Activity Deleted'))
@@ -58,5 +55,5 @@ export const deleteActivity = (activityId) => (dispatch, getState) => {
 };
 
 export const clearErrors = () => (dispatch) => {
-    dispatch({ type: CLEAR_ERRORS });
+    dispatch({ type: activityConstants.CLEAR_ERRORS });
 };
