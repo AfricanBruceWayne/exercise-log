@@ -1,4 +1,4 @@
-import { activityConstants} from '../../constants';
+import { activityConstants } from '../../constants';
 
 const initialState = {
     activities: [],
@@ -7,11 +7,6 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch (action.type) {
-      case activityConstants.LOADING_DATA:
-        return {
-          ...state,
-          loading: true
-        };
       case activityConstants.GET_ACTIVITIES:
         return {
           ...state,
@@ -27,6 +22,11 @@ export default function(state = initialState, action) {
         return {
           ...state,
           activities: [action.payload, ...state.activities]
+        };
+      case activityConstants.LOADING_DATA:
+        return {
+          ...state,
+          loading: true
         };
       default:
         return state;

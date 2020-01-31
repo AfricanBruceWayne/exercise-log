@@ -14,7 +14,7 @@ export const registerUser = (user, history) => dispatch => {
         .then(
             setTimeout(() => {
                 dispatch(alertActions.clear());
-              }, 3000)
+              }, 1500)
         )
         .catch(err => {
             dispatch({
@@ -38,7 +38,7 @@ export const loginUser = (user) => dispatch => {
         .then(
             setTimeout(() => {
                 dispatch(alertActions.clear());
-              }, 3000)
+              }, 2500)
         )
         .catch(err => {
             dispatch({
@@ -61,4 +61,7 @@ export const logoutUser = (history) => dispatch => {
     dispatch(setCurrentUser({}));
     history.push('/');
     dispatch(alertActions.success('Logout successful'))
+    setTimeout(() => {
+        dispatch(alertActions.clear());
+    }, 1500)
 }

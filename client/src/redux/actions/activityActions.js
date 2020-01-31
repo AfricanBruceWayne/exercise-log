@@ -31,6 +31,9 @@ export const addActivity = (newActivity) => (dispatch) => {
                 payload: res.data
             });
             dispatch(alertActions.success('New activity added'));
+            setTimeout(() => {
+                dispatch(alertActions.clear());
+            }, 1500)
         })
         .catch((err) => {
             dispatch({
@@ -50,6 +53,9 @@ export const deleteActivity = (activityId) => (dispatch) => {
                 payload: activityId
             });
             dispatch(alertActions.success('Activity Deleted'))
+            setTimeout(() => {
+                dispatch(alertActions.clear());
+            }, 1500)
         })
         .catch((err) => console.log(err));
 };
