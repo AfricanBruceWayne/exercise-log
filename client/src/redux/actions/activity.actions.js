@@ -1,5 +1,4 @@
 import { activityConstants } from '../../constants';
-import { activityService } from '../../services';
 import { alertActions } from './';
 
 export const activityActions = {
