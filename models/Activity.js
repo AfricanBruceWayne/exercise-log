@@ -11,7 +11,6 @@ const ActivitySchema = new Schema({
             ref: 'User'
         }
     },
-    createdAt: { type: Date, default: Date.now }
 });
 
 module.exports = Activity = mongoose.model('activity', ActivitySchema);
