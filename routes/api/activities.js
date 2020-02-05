@@ -4,11 +4,15 @@ const router = express.Router();
 // Activity Model
 const Activities = require('../../models/Activity');
 
+
+
+// var createdAt = moment().format('DD-MMM-YYYY');
+
 // @route   GET api/activities
 // @desc    Get All Activities
 // @access  Public
 router.get('/', (req, res) => {
-  Activities.find()
+  Activities.find({})
     .sort({ date: -1 })
     .then(activities => res.json(activities))
     .catch((err) => { res.status(500).json({ success: false, msg: `Something went wrong. ${err}` });
@@ -25,6 +29,7 @@ router.post('/', (req, res) => {
     description: req.body.description,
     date: req.body.date
   });
+
 
   newActivity.save()
     .then((result) => {
@@ -84,5 +89,9 @@ router.delete('/:id', (req, res) => {
       res.status(404).json({ success: false, msg: 'Nothing to delete.' });
     });
 });
+
+// function isValidDate(value) {
+//   if (!value.match)
+// }
 
 module.exports = router;
