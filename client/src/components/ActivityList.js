@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import {
     Container,
     Button, Table
@@ -20,7 +21,7 @@ class ActivityList extends Component {
 
       render() {
         const { activities } = this.props.activity;
-
+        var count = 1;
         return (
           <div>
             { this.props.isAuthenticated ? (
@@ -40,8 +41,8 @@ class ActivityList extends Component {
                     {activities.map(({ _id, date, title, description }) => (
                     <CSSTransition key={_id} timeout={500} classNames='fade'>
                       <tr>
-                        <th scope="row">1</th>
-                        <td>{date}</td>
+                        <th scope="row">{count++}</th>
+                        <td>{moment(`${date}`).format('DD-MMM-YYYY')}</td>
                         <td>{description}</td>
                         <td>{title}</td>
                         <td>
@@ -78,6 +79,8 @@ const mapStateToProps = state => ({
     activity: state.activity,
     isAuthenticated: state.auth.isAuthenticated
 });
+
+
 
 export default connect(
     mapStateToProps,
